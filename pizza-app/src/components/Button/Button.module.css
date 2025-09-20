@@ -6,11 +6,13 @@
   transition: background 0.25s;
   font-style: 16px;
   border: none;
+  color: var(--white-color)
 }
+
 .button:hover {
-  background: #060c88;
+  background: var(--primary-color)
 }
 
 .accent {
-    background: #312EB5;
+  background: var(--primary-color);
 }
