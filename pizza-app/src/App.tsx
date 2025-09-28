@@ -1,20 +1,11 @@
 import { useState } from "react";
 import Button from "./components/Button/Button";
 import Input from "./components/Input/Input";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import { Menu } from './pages/Menu/Menu';
 import { Cart } from './pages/Cart/Cart';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Menu/>
-  },
-  {
-    path: '/cart',
-    element: <Cart/>
-  },
-]);
+
 
 function App() {
   const [counter, setCounter] = useState<number>(0);
@@ -31,10 +22,10 @@ function App() {
       </Button>
       <Input placeholder="email" />
       <div>
-        <a href="/">Меню</a>
-        <a href="/cart">Корзина</a>
+        <Link to="/">Меню</Link>
+        <Link to="/cart">Корзина</Link>
       </div>
-      <RouterProvider router={router} />
+      
     </>
   );
 }
