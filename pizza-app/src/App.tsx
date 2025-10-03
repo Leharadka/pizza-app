@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Button from "./components/Button/Button";
 import Input from "./components/Input/Input";
-import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
-import { Menu } from './pages/Menu/Menu';
-import { Cart } from './pages/Cart/Cart';
-
+import { Link } from "react-router-dom";
 
 
 function App() {
