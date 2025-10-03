@@ -1,28 +1,26 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.tsx";
 import { Menu } from "./pages/Menu/Menu.tsx";
 import { Cart } from "./pages/Cart/Cart.tsx";
 import { Error } from "./pages/Error/Error.tsx";
+import { Layout } from './layout/Menu/Layout.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Menu />,
+    element: <Layout />,
     children: [
       {
         path: "/",
-        element: <Cart />,
+        element: <Menu />,
       },
       {
         path: "/cart",
-        element: <Menu />,
-      }
+        element: <Cart />,
+      },
     ],
   },
   {
@@ -33,8 +31,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <RouterProvider router={router} />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>
 );
