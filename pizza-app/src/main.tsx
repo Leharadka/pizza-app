@@ -6,10 +6,10 @@ import { Cart } from "./pages/Cart/Cart.tsx";
 import { Error as ErrorPage } from "./pages/Error/Error.tsx";
 import { Layout } from "./layout/Menu/Layout.tsx";
 import { Product } from "./pages/Product/Product.tsx";
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { PREFIX } from "./helpers/API.ts";
 
-const Menu = lazy(() => import('./pages/Menu/Menu'))
+const Menu = lazy(() => import("./pages/Menu/Menu"));
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Suspense fallback={<>Загрузка...</>}><Menu /></Suspense>,
+        element: (
+          <Suspense fallback={<>Загрузка...</>}>
+            <Menu />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
@@ -27,19 +31,14 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/product/:id",
-    element: <Product />,
-    errorElement: <>Ошибка</>,
+    path: '/product/:id',
+    element: `<Product />`,
     loader: async ({ params }) => {
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve;
-        }, 2000);
-      });
-      const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
-      return data;
-    },
-  },
+        const data = axios.get(`${PREFIX}/products/${params.id}`).then(res => res.data);
+        return { data };
+    }
+},
+  
   {
     path: "*",
     element: <ErrorPage />,
@@ -51,3 +50,6 @@ createRoot(document.getElementById("root")!).render(
     <RouterProvider router={router} />
   </StrictMode>
 );
+function defer(arg0: { data: Promise<AxiosResponse<any, any, {}>> }): unknown {
+  throw new Error("Function not implemented.");
+}
